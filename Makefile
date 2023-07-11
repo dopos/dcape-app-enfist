@@ -1,6 +1,8 @@
 # enfist init Makefile
 # This file included by ../../Makefile
 SHELL               = /bin/bash
+CFG                ?= .env
+
 # Docker image version tested for actual dcape release
 ENFIST_VER0        ?= v0.6.12
 
@@ -14,8 +16,12 @@ ENFIST_DB_PASS     ?= $(shell openssl rand -hex 16; echo)
 #- apisite/app-enfist docker image version
 ENFIST_VER         ?= $(ENFIST_VER0)
 
-NAME=ENFIST
-DB_INIT_SQL=apps/enfist/migrate.sql
+#- dcape root directory
+DCAPE_ROOT         ?= $(DCAPE_ROOT)
+
+# Vars for db-create
+NAME                = ENFIST
+DB_INIT_SQL         = apps/enfist/migrate.sql
 # ------------------------------------------------------------------------------
 
 -include $(CFG)
@@ -28,7 +34,6 @@ else
 include $(DCAPE_ROOT)/Makefile.app
 endif
 
-
 # ------------------------------------------------------------------------------
 
 init:
@@ -37,10 +42,5 @@ init:
 	fi
 	@echo "  URL: $(DCAPE_SCHEME)://$(DCAPE_HOST)/conf/"
 
-#mydb: NAME=PDNS
-#mydb: DB_INIT_SQL=$(APP_ROOT)/schema.pgsql.sql
-#mydb: db-create
-
 setup: db-create
-	@cmd=create ; \
 	$(MAKE) -s dc CMD="run --rm config make poma-install"
