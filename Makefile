@@ -28,7 +28,7 @@ DB_INIT_SQL         = apps/enfist/migrate.sql
 export
 
 ifdef DCAPE_STACK
-include $(DCAPE_ROOT)/$(CFG)
+#include $(DCAPE_ROOT)/.dcape.env
 include $(DCAPE_ROOT)/Makefile.dcape
 else
 include $(DCAPE_ROOT)/Makefile.app
@@ -42,5 +42,7 @@ init:
 	fi
 	@echo "  URL: $(DCAPE_SCHEME)://$(DCAPE_HOST)/conf/"
 
-setup: db-create
-	$(MAKE) -s dc CMD="run --rm config make poma-install"
+.setup-before-up: db-create db-setup
+
+db-setup:
+	@$(MAKE) -s compose CMD="run --rm config make poma-install"
