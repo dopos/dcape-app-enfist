@@ -1,5 +1,7 @@
-# enfist init Makefile
-# This file included by ../../Makefile
+## enfist Makefile
+## Used with dcape at ../../
+#:
+
 SHELL               = /bin/bash
 CFG                ?= .env
 
@@ -22,13 +24,13 @@ DCAPE_ROOT         ?= $(DCAPE_ROOT)
 # Vars for db-create
 NAME                = ENFIST
 DB_INIT_SQL         = apps/enfist/migrate.sql
+
 # ------------------------------------------------------------------------------
 
 -include $(CFG)
 export
 
 ifdef DCAPE_STACK
-#include $(DCAPE_ROOT)/.dcape.env
 include $(DCAPE_ROOT)/Makefile.dcape
 else
 include $(DCAPE_ROOT)/Makefile.app
@@ -36,13 +38,16 @@ endif
 
 # ------------------------------------------------------------------------------
 
+# check app version
 init:
 	@if [[ "$$ENFIST_VER0" != "$$ENFIST_VER" ]] ; then \
 	  echo "Warning: ENFIST_VER in dcape ($$ENFIST_VER0) differs from yours ($$ENFIST_VER)" ; \
 	fi
 	@echo "  URL: $(DCAPE_SCHEME)://$(DCAPE_HOST)/conf/"
 
+# setup app
 .setup-before-up: db-create db-setup
 
+# load db schema
 db-setup:
 	@$(MAKE) -s compose CMD="run --rm config make poma-install"
