@@ -53,6 +53,6 @@ make up
 
 ## License
 
-Copyright 2024 Aleksei Kovrizhkin <lekovr+dopos@gmail.com>
+The MIT License (MIT), see [LICENSE](LICENSE).
 
-Licensed under the Apache License, Version 2.0 (the "[License](LICENSE)");
+Copyright (c) 2023-2024 Aleksei Kovrizhkin <lekovr+dopos@gmail.com>
