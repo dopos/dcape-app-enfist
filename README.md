@@ -1,10 +1,3 @@
-<p align="center">
-  <span>Pусский</span> |
-  <a href="README.en.md#readme">English</a>
-</p>
-
----
-
 # enfist
 
 > Приложение ядра [dcape](https://github.com/dopos/dcape) для размещения файлов конфигурации приложений.
@@ -25,7 +18,7 @@
 
 **Enfist** - это сервис хранения конфигураций приложений. Конфигурации хранятся в БД в виде Key-value таблицы, где ключ (key) формируется из адреса git репозитория `organization--repo_name--branch` (`организация--проект--ветка`), а значение (value) - содержимое `.env` файла.
 
-Доступ к хранилищу ограничивается [narra](/dcape/coreapps/narra) и осуществляется через фронтенд **dcape**.
+Доступ к хранилищу ограничивается [narra](https://github.com/dopos/dcape-app-narra) и осуществляется через фронтенд **dcape**.
 
 Кроме веб-интерфейса, работа с конфигурациями запуска может осуществляться посредством [dcape-config-cli](https://github.com/dopos/dcape-config-cli).
 Примеры команд, доступных после клонирования (git clone) и настройки (make .env) dcape-config-cli:
